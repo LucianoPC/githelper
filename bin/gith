@@ -12,13 +12,25 @@ def usage
   abort
 end
 
-def main
-  usage if ARGV.count < 3 || !VALID_OPTIONS.include?(ARGV[0])
+def branch
+  usage if ARGV.count < 2 || !VALID_OPTIONS.include?(ARGV[0])
 
   branch_name = ARGV[1]
   base_branch_name = ARGV[2] || 'master'
 
-  if Githelper.need_rebase(branch_name, base_branch_name)
-    puts 'Rebase'
+  result = Githelper.check_branch(branch_name, base_branch_name)
+  if result == Githelper::BRANCH_STATUS[:need_rebase]
+    puts "Branch: #{branch_name}"
+    puts 'Status: Need - Rebase'
+    puts "With: #{base_branch_name}"
   end
 end
+
+def main
+  usage if ARGV.count == 0 || !VALID_OPTIONS.include?(ARGV[0])
+
+  option = ARGV[0]
+  send(option.to_s)
+end
+
+main
