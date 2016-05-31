@@ -4,7 +4,7 @@ require 'githelper/version'
 module Githelper
   module_function
 
-  BRANCH_STATUS = [:need_rebase].freeze
+  BRANCH_STATUS = [:need_rebase, :none].freeze
 
   def check_branch(branch, base_branch)
     branch_commits = Githelper.get_branch_commits(branch)

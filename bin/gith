@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'githelper'
+
+VALID_OPTIONS = %w(branch).freeze
+
+def usage
+  puts 'Usage: gith branch [branch_name] [base_branch_name]'
+  puts "\n by default, base_branch_name is 'master'"
+
+  abort
+end
+
+def main
+  usage if ARGV.count < 3 || !VALID_OPTIONS.include?(ARGV[0])
+
+  branch_name = ARGV[1]
+  base_branch_name = ARGV[2] || 'master'
+
+  if Githelper.need_rebase(branch_name, base_branch_name)
+    puts 'Rebase'
+  end
+end
