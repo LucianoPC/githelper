@@ -12,16 +12,36 @@ def usage
   abort
 end
 
+def branchs_names
+  if ARGV.count > 1
+    branch_names = [ARGV[1]]
+    base_branch_name = ARGV[2] || 'master'
+  else
+    base_branch_name = 'master'
+    branch_names = Githelper.get_all_branchs(base_branch_name)
+  end
+
+  [branch_names, base_branch_name]
+end
+
 def branch
-  usage if ARGV.count < 2 || !VALID_OPTIONS.include?(ARGV[0])
+  branch_names, base_branch_name = branchs_names
 
-  branch_name = ARGV[1]
-  base_branch_name = ARGV[2] || 'master'
+  branch_names.each do |branch_name|
+    puts "\n" if branch_name != branch_names.first
+    show_branch_status(branch_name, base_branch_name)
+  end
+end
 
+def show_branch_status(branch_name, base_branch_name)
   result = Githelper.check_branch(branch_name, base_branch_name)
   if result == Githelper::BRANCH_STATUS[:need_rebase]
     puts "Branch: #{branch_name}"
     puts 'Status: Need - Rebase'
+    puts "With: #{base_branch_name}"
+  elsif result == Githelper::BRANCH_STATUS[:none]
+    puts "Branch: #{branch_name}"
+    puts 'Status: OK'
     puts "With: #{base_branch_name}"
   end
 end

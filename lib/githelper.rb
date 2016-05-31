@@ -4,7 +4,7 @@ require 'githelper/version'
 module Githelper
   module_function
 
-  BRANCH_STATUS = { none: 0, need_rebase: 1 }.freeze
+  BRANCH_STATUS = { ok: 0, need_rebase: 1 }.freeze
 
   def check_branch(branch_name, base_branch_name)
     branch_commits = Githelper.get_branch_commits(branch_name)
@@ -24,8 +24,18 @@ module Githelper
   def get_branch_commits(branch)
     commits = `git log #{branch}`.split("\n")
     commits = commits.collect { |line| line.scan(/commit (.*)/).flatten }
-    commits = commits.select { |line| !line.empty? }
+    commits = commits.select { |line| !line.empty? }.flatten
 
     commits
+  end
+
+  def get_all_branchs(remove_branchs = [])
+    remove_branchs = [remove_branchs] unless remove_branchs.is_a?(Array)
+    branchs = `git branch`.split("\n")
+    branchs = branchs.collect { |branch| branch.scan(/\W(.*)/).flatten }
+    branchs = branchs.flatten.map(&:strip)
+    branchs -= remove_branchs
+
+    branchs
   end
 end
