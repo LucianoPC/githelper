@@ -1,9 +1,10 @@
-require "githelper/version"
+require 'githelper/version'
 
+# Module to help git
 module Githelper
   module_function
 
-  BRANCH_STATUS = [:need_rebase]
+  BRANCH_STATUS = [:need_rebase].freeze
 
   def check_branch(branch, base_branch)
     branch_commits = Githelper.get_branch_commits(branch)
@@ -18,13 +19,14 @@ module Githelper
     need_rebase = !base_branch_commits.include?(branch_commits.first)
     need_rebase &= !branch_commits.include?(base_branch_commits.first)
 
-    return need_rebase
+    need_rebase
   end
 
   def get_branch_commits(branch)
-    commits = `git log master`.split("\n")
-    commits = commits.collect{|line| line.scan(/commit (.*)/).flatten}
-    commits = commits.select{|line| !line.empty?}
-    return commits
+    commits = `git log #{branch}`.split("\n")
+    commits = commits.collect { |line| line.scan(/commit (.*)/).flatten }
+    commits = commits.select { |line| !line.empty? }
+
+    commits
   end
 end
