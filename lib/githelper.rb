@@ -16,9 +16,10 @@ module Githelper
   end
 
   def need_rebase(branch_commits, base_branch_commits)
-    need_rebase = !branch_commits.include?(base_branch_commits.first)
+    need = !branch_commits.include?(base_branch_commits.first)
+    need &= !base_branch_commits.include?(branch_commits.first)
 
-    need_rebase
+    need
   end
 
   def get_branch_commits(branch)

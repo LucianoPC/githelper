@@ -29,5 +29,13 @@ describe Githelper do
       result = Githelper.need_rebase(branch_commits, base_branch_commits)
       expect(result).to be false
     end
+
+    it 'branch with all commits in base not needs rebase' do
+      branch_commits = %w(e d c b a)
+      base_branch_commits = %w(f e d c b a)
+
+      result = Githelper.need_rebase(branch_commits, base_branch_commits)
+      expect(result).to be false
+    end
   end
 end
