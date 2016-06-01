@@ -4,7 +4,7 @@ require 'githelper/version'
 module Githelper
   module_function
 
-  BRANCH_STATUS = { ok: 0, need_rebase: 1 }.freeze
+  BRANCH_STATUS = { ok: 0, need_rebase: 1, is_merged: 2 }.freeze
 
   def check_branch(branch_name, base_branch_name)
     branch_commits = Githelper.get_branch_commits(branch_name)
@@ -12,6 +12,8 @@ module Githelper
 
     if need_rebase(branch_commits, base_branch_commits)
       return BRANCH_STATUS[:need_rebase]
+    elsif merged?(branch_commits, base_branch_commits)
+      return BRANCH_STATUS[:is_merged]
     end
   end
 
@@ -20,6 +22,14 @@ module Githelper
     need &= !base_branch_commits.include?(branch_commits.first)
 
     need
+  end
+
+  def merged?(branch_commits, base_branch_commits)
+    branch_commits.each do |commit|
+      return false unless base_branch_commits.include?(commit)
+    end
+
+    true
   end
 
   def get_branch_commits(branch)

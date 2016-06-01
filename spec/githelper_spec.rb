@@ -38,4 +38,22 @@ describe Githelper do
       expect(result).to be false
     end
   end
+
+  describe 'test is_merged function' do
+    it 'branch have all commits in base branch is merged' do
+      branch_commits = %w(e d c b a)
+      base_branch_commits = %w(f e d c b a)
+
+      result = Githelper.is_merged(branch_commits, base_branch_commits)
+      expect(result).to be true
+    end
+
+    it 'base branch dont have all commits of branch is not merged' do
+      branch_commits = %w(e d c b a)
+      base_branch_commits = %w(f e d b a)
+
+      result = Githelper.is_merged(branch_commits, base_branch_commits)
+      expect(result).to be false
+    end
+  end
 end

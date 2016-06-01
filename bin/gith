@@ -35,15 +35,15 @@ end
 
 def show_branch_status(branch_name, base_branch_name)
   result = Githelper.check_branch(branch_name, base_branch_name)
+  puts "Branch: #{branch_name}"
   if result == Githelper::BRANCH_STATUS[:need_rebase]
-    puts "Branch: #{branch_name}"
-    puts 'Status: Need - Rebase'
-    puts "With: #{base_branch_name}"
+    puts 'Status: Need Rebase'
+  elsif result == Githelper::BRANCH_STATUS[:is_merged]
+    puts 'Status: Is Merged'
   elsif result == Githelper::BRANCH_STATUS[:none]
-    puts "Branch: #{branch_name}"
     puts 'Status: OK'
-    puts "With: #{base_branch_name}"
   end
+  puts "With: #{base_branch_name}"
 end
 
 def main
