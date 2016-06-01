@@ -17,6 +17,21 @@ module Githelper
     end
   end
 
+  def all_merged(base_branch_name)
+    branchs = Githelper.get_all_branchs(base_branch_name)
+    base_branch_commits = Githelper.get_branch_commits(base_branch_name)
+
+    merged_branchs = []
+    branchs.each do |branch_name|
+      branch_commits = Githelper.get_branch_commits(branch_name)
+      if merged?(branch_commits, base_branch_commits)
+        merged_branchs << branch_name
+      end
+    end
+
+    merged_branchs
+  end
+
   def need_rebase(branch_commits, base_branch_commits)
     need = !branch_commits.include?(base_branch_commits.first)
     need &= !base_branch_commits.include?(branch_commits.first)
