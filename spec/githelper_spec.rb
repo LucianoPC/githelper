@@ -44,7 +44,7 @@ describe Githelper do
       branch_commits = %w(e d c b a)
       base_branch_commits = %w(f e d c b a)
 
-      result = Githelper.is_merged(branch_commits, base_branch_commits)
+      result = Githelper.merged?(branch_commits, base_branch_commits)
       expect(result).to be true
     end
 
@@ -52,7 +52,7 @@ describe Githelper do
       branch_commits = %w(e d c b a)
       base_branch_commits = %w(f e d b a)
 
-      result = Githelper.is_merged(branch_commits, base_branch_commits)
+      result = Githelper.merged?(branch_commits, base_branch_commits)
       expect(result).to be false
     end
   end
