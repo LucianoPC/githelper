@@ -8,23 +8,15 @@ VALID_OPTIONS = %w(branch merged).freeze
 
 def usage
   puts 'Usage: gith [option]'
-  puts "\n[options]"
-  puts ' branch'
-  puts ' merged'
+  puts "\n[options]\n\n"
+  puts " branch \t $ gith branch"
+  puts " \t\t - Use for check your branchs"
 
   abort
 end
 
 def branch
   OptionBranch.run(ARGV)
-end
-
-def merged
-  base_branch_name = 'master' if ARGV.count < 2
-  base_branch_name ||= ARGV[1]
-
-  merged_branchs = Githelper.all_merged(base_branch_name)
-  merged_branchs.each { |branch_name| puts branch_name }
 end
 
 def main
