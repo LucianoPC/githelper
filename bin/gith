@@ -1,29 +1,10 @@
 #!/usr/bin/env ruby
 
 require 'bundler/setup'
-require 'githelper'
-require 'option_branch'
-
-VALID_OPTIONS = %w(branch merged).freeze
-
-def usage
-  puts 'Usage: gith [option]'
-  puts "\n[options]\n\n"
-  puts " branch \t $ gith branch"
-  puts " \t\t - Use for check your branchs"
-
-  abort
-end
-
-def branch
-  OptionBranch.run(ARGV)
-end
+require 'commands/gith'
 
 def main
-  usage if ARGV.count == 0 || !VALID_OPTIONS.include?(ARGV[0])
-
-  option = ARGV[0]
-  send(option.to_s)
+  Gith.run(ARGV)
 end
 
 main
