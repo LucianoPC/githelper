@@ -5,10 +5,6 @@ require 'githelper'
 
 # Command 'gith branch status' implementation
 class Status < Command
-  def self.usage
-    'Usage: gith branch status'
-  end
-
   def self.options_messages
     %(  status \t $ gith branch status
   \t\t - Show status of all branchs

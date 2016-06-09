@@ -3,10 +3,6 @@ require 'commands/gith/branch'
 
 # Command 'gith' implementation
 class Gith < Command
-  def self.usage
-    'Usage: gith [option]'
-  end
-
   def self.options_messages
     ''
   end
@@ -21,7 +17,7 @@ class Gith < Command
   end
 
   def self.parent
-    Command
+    nil
   end
 
   def self.childrens

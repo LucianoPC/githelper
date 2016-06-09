@@ -5,10 +5,6 @@ require 'commands/gith/branch/merged'
 
 # Command 'gith branch' implementation
 class Branch < Command
-  def self.usage
-    'Usage: gith branch [option]'
-  end
-
   def self.options_messages
     %(  branch \t $ gith branch
   \t\t - Use for check your branchs

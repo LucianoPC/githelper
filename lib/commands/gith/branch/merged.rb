@@ -5,10 +5,6 @@ require 'githelper'
 
 # Command 'gith branch merged' implementation
 class Merged < Command
-  def self.usage
-    'Usage: gith branch merged'
-  end
-
   def self.options_messages
     %(  merged \t $ gith branch merged
   \t\t - Show all branchs that was merged on base_branch
