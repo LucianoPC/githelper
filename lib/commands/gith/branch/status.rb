@@ -36,9 +36,9 @@ class Status < Command
   end
 
   def self.branchs_names(argv)
-    if argv.count > 3
-      branch_names = [argv[3]]
-      base_branch_name = argv[4] || 'master'
+    if argv.count > 0
+      branch_names = [argv[0]]
+      base_branch_name = argv[1] || 'master'
     else
       base_branch_name = 'master'
       branch_names = Githelper.get_all_branchs(base_branch_name)

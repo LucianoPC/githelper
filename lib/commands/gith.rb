@@ -12,7 +12,6 @@ class Gith < Command
   end
 
   def self.run(argv)
-    argv.unshift(self.command_name)
     self.run_childrens(argv)
   end
 

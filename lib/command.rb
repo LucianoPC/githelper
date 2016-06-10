@@ -25,13 +25,11 @@ class Command
   end
 
   def self.run_childrens(argv)
-    self_argv_index = argv.index(self.command_name)
-    return self.show_usage unless self_argv_index
-
-    children_command = argv[self_argv_index + 1]
+    children_command = argv.first
     children = self.childrens.detect{|c| c.command_name == children_command}
-    return self.show_usage unless children
+    return self.usage unless children
 
+    argv.delete(children.command_name)
     children.run(argv)
   end
 
