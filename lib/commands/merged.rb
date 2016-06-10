@@ -1,5 +1,5 @@
 require 'command'
-require 'commands/gith/branch'
+require 'commands/branch'
 
 require 'githelper'
 

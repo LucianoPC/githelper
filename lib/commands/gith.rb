@@ -1,5 +1,5 @@
 require 'command'
-require 'commands/gith/branch'
+require 'commands/branch'
 
 # Command 'gith' implementation
 class Gith < Command

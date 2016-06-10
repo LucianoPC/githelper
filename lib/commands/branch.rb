@@ -1,7 +1,7 @@
 require 'command'
 require 'commands/gith'
-require 'commands/gith/branch/status'
-require 'commands/gith/branch/merged'
+require 'commands/status'
+require 'commands/merged'
 
 # Command 'gith branch' implementation
 class Branch < Command
