@@ -15,10 +15,6 @@ class Branch < Command
     'branch'
   end
 
-  def self.run(argv)
-    self.run_childrens(argv)
-  end
-
   def self.parent
     Gith
   end

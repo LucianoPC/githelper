@@ -27,12 +27,10 @@ class Merged < Command
   end
 
   def self.run(argv)
-    base_branch_name = 'master' if ARGV.count < 1
-    base_branch_name ||= ARGV[0]
+    base_branch_name = 'master' if argv.count < 1
+    base_branch_name ||= argv[0]
 
     merged_branchs = Githelper.all_merged(base_branch_name)
     merged_branchs.each { |branch_name| puts branch_name }
   end
 end
-
-

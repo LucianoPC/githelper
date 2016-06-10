@@ -27,11 +27,11 @@ class Status < Command
   end
 
   def self.run(argv)
-    branch_names, base_branch_name = self.branchs_names(argv)
+    branch_names, base_branch_name = branchs_names(argv)
 
     branch_names.each do |branch_name|
       puts "\n" if branch_name != branch_names.first
-      self.show_branch_status(branch_name, base_branch_name)
+      show_branch_status(branch_name, base_branch_name)
     end
   end
 
@@ -60,4 +60,3 @@ class Status < Command
     puts "With: #{base_branch_name}"
   end
 end
-

@@ -11,10 +11,6 @@ class Gith < Command
     'gith'
   end
 
-  def self.run(argv)
-    self.run_childrens(argv)
-  end
-
   def self.parent
     nil
   end
